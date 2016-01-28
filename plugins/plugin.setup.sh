@@ -31,9 +31,10 @@ setup_update_maven_logging(){
 }
 
 setup_save_conf(){
-cat <<EOF > ${KDIR}/setup.conf
-export MAVEN_OPTS="-Dlogback.configurationFile=$KDIR/conf/logging.xml"
+cat <<EOF >> ${KDIR}/conf/setup.conf
+# Auto created by 'kikaha setup'
+export MAVEN_OPTS="-Dlogback.configurationFile=$MVN_LOGFILE"
 export M2_HOME="$M3_BUNDLED"
-export PATH="$M2_HOME/bin:$PATH"
+export PATH="\$M2_HOME/bin:$PATH"
 EOF
 }

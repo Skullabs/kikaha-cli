@@ -28,7 +28,7 @@ done
 plugin_name=$1
 
 plugin_location=`kikaha_which_plugin $plugin_name`
-if [ ! "$plugin_location" = "" ]; then
+if [ ! "$plugin_location" = "" -a ! "$plugin_name" = "build" ]; then
 	shift
 else
 	plugin_name="build"
@@ -37,5 +37,6 @@ fi
 
 . $plugin_location
 debug "Plugin loaded: $(grape $plugin_name)"
+debug "Plugin args: $@"
 kikaha_run_plugin $plugin_name $@
 
