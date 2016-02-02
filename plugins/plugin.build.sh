@@ -37,7 +37,6 @@ build_move_to(){
 	else
 		info "$action current project (and its modules)."
 	fi
-
 }
 
 build_build(){
@@ -70,13 +69,20 @@ build_clean(){
         $MVN clean
 }
 
+build_test(){
+	build_move_to "Testing" $1
+	build_requires_pom
+        $MVN clean test
+}
+
 build_help(){
 cat <<EOF
  --[ available commands ]--------------------------
   $(grape build):        full build of all modules
   $(grape clean):        clean up the current workspace
   $(grape package):      generate a package from a module
-  $(grape run):          run a module
+  $(grape run_app):      run a module
+  $(grape test):         test a module (or all modules)
   $(grape help):         print this help message
 
  --[ available config variables ]------------------
