@@ -1,0 +1,67 @@
+#!/bin/sh
+
+# FUNCTIONS
+download(){
+	curl -L $1 -o $2
+}
+
+cd_back(){
+	cd - > /dev/null
+}
+
+arg_name(){
+	echo "$@" | sed 's/--\([^=]*\).*/\1/'
+}
+
+arg_value(){
+	echo "$@" | sed 's/--[^=]*=\(.*\)/\1/'
+}
+
+download_and_install(){
+	mkdir -p $tmp_dir
+	cd $tmp_dir
+
+	echo "Downloading last stable version..."
+	download $last_release $pkg
+
+	echo "Extracting..."
+	unzip -x $pkg
+	mv $pkg_root_folder $install_dir
+	chmod +x $install_dir/kikaha
+
+	cd_back
+	rm -rf $tmp_dir
+}
+
+configure_path(){
+echo "Configuring PATH..."
+cat << EOF >> ${HOME}/.bashrc
+# kikaha-cli configuration
+export KIKAHA_HOME=$install_dir
+export PATH="\$KIKAHA_HOME:\$PATH"
+EOF
+}
+
+# VARIABLES
+last_release=https://github.com/Skullabs/kikaha-cli/archive/master.zip
+pkg_root_folder=kikaha-cli-master
+pkg=${pkg_root_folder}.zip
+tmp_dir=kikaha_$$
+install_dir=${HOME}/.kikaha/
+
+# MAIN
+for arg in $@; do
+  name=`arg_name $arg`
+  value=`arg_value $arg`
+  export $name=$value
+done
+
+if [ -d $install_dir ]; then
+	echo "Directory already exists. Overwrite it? [Ctrl+C: Abort; Enter: Continue]"
+	read abort
+	rm -rf $install_dir
+fi
+
+download_and_install
+configure_path
+echo 'Done!'
