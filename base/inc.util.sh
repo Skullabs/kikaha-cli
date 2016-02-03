@@ -59,3 +59,11 @@ download(){
 	debug "Downloading $1"
 	curl -s -k -L "$1" > $2
 }
+
+arg_name(){
+  echo "$@" | sed 's/--\([^=]*\).*/\1/'
+}
+
+arg_value(){
+  echo "$@" | sed 's/--[^=]*=\(.*\)/\1/'
+}
