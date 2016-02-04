@@ -10,6 +10,11 @@ repo_add(){
 	name=$1
 	url=$2
 
+  if [ "$force" = "true" ]; then
+    debug "Force mode. Removing existing data..."
+    rm -rf $PLUGIN_DIR/$name
+  fi
+
 	if [ -d "$PLUGIN_DIR/$name" ]; then
 		warn "Repository already exists: $(grape $name)"
 		halt
@@ -38,8 +43,10 @@ repo_enable_all_plugins_from(){
 	files=`find . | grep './plugin.*.sh'`
 	if [ ! "$files" = "" ]; then
 		for plugin in plugin.*.sh; do
-			plugin_name=`basename $plugin`
-			ln -f -s $PLUGIN_DIR/$1/$plugin_name $PLUGIN_DIR/$plugin_name
+			plugin_file_name=`basename $plugin`
+      plugin_name=`echo $plugin_file_name | sed 's/plugin\.\([^\.]*\)\.sh/\1/'`
+			ln -f -s $PLUGIN_DIR/$1/$plugin_file_name $PLUGIN_DIR/$plugin_file_name
+      kikaha $plugin_name configure $PLUGIN_DIR/$1
 		done
 	else
 		warn "No plugin found on repository $1"

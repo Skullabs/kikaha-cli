@@ -4,7 +4,8 @@ M3_BUNDLED=$WORK_DIR/mvn
 setup_run(){
 	setup_download_maven
 	setup_update_maven_logging
-	setup_save_conf
+	setup_save_maven_conf
+  kikaha repo add default git@github.com:Skullabs/kikaha-cli-plugins.git --force=true --QUIET=true
 }
 
 setup_download_maven(){
@@ -30,7 +31,8 @@ setup_update_maven_logging(){
 	cd_back
 }
 
-setup_save_conf(){
+setup_save_maven_conf(){
+info "Saving maven configuration..."
 cat <<EOF >> ${KDIR}/conf/setup.conf
 # Auto created by 'kikaha setup'
 export MAVEN_OPTS="-Dlogback.configurationFile=$MVN_LOGFILE"
