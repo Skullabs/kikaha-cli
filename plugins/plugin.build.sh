@@ -31,7 +31,7 @@ build_requires_pom(){
 build_move_to(){
 	action=$1
 	dir=$2
-	if [ ! "$dir" = "" ]; then
+	if [ ! "$dir" = "" -a "`is_arg $dir`" = "0" ]; then
 		info "$action module $dir..."
 		cd ${dir}
 	else

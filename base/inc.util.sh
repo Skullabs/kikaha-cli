@@ -67,3 +67,12 @@ arg_name(){
 arg_value(){
   echo "$@" | sed 's/--[^=]*=\(.*\)/\1/'
 }
+
+is_arg(){
+  prefix=`echo "$@" | sed 's/\(--\).*/\1/'`
+  if [ "$prefix" = "--" ]; then
+    echo 1
+  else
+    echo 0
+  fi
+}
