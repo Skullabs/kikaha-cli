@@ -30,7 +30,7 @@ for arg in $@; do
   fi
 done
 
-kikaha_print_logo
+kikaha_print_title
 
 # ==================================================
 #  Main

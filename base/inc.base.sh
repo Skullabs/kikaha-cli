@@ -1,6 +1,12 @@
 #!/bin/sh
 PLUGIN_DIR=$KDIR/plugins/
 
+kikaha_print_title(){
+  if [ ! "$QUIET" = "true" ]; then
+    info "$(yellow 'KIKAHA') - $(grape 'an absurdly fast web server designed for microservices')"
+  fi
+}
+
 kikaha_print_logo(){
 if [ ! "$QUIET" = "true" ]; then
 cat <<EOF

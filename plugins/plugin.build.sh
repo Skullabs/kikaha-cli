@@ -76,7 +76,10 @@ build_test(){
 }
 
 build_help(){
+kikaha_print_logo
+
 cat <<EOF
+
  --[ available commands ]--------------------------
   $(grape build):        full build of all modules
   $(grape clean):        clean up the current workspace
