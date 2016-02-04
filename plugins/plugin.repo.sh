@@ -16,7 +16,7 @@ repo_add(){
 	fi
 
 	cd $PLUGIN_DIR
-	info "Cloning plugin repository"
+	info "Cloning plugin repository $name"
 	git clone $url $name
 	repo_enable_all_plugins_from $name
 }

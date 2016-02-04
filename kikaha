@@ -14,8 +14,6 @@ for include in $KDIR/base/inc.*.sh; do
 	. $include
 done
 
-kikaha_print_logo
-
 # CONFIGURATIONS
 for conf in $KDIR/conf/*.conf; do
 	debug "Reading configuration: $(grape $conf)"
@@ -31,6 +29,8 @@ for arg in $@; do
     debug "Command line variable $name: $value"
   fi
 done
+
+kikaha_print_logo
 
 # ==================================================
 #  Main
