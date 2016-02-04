@@ -22,6 +22,16 @@ for conf in $KDIR/conf/*.conf; do
 	. $conf
 done
 
+# LOAD VARIABLES FROM COMMAND LINE
+for arg in $@; do
+  name=`arg_name $arg`
+  if [ ! "$name" = "${arg}" ]; then
+    value=`arg_value $arg`
+    export $name=$value
+    debug "Command line variable $name: $value"
+  fi
+done
+
 # ==================================================
 #  Main
 # ==================================================
