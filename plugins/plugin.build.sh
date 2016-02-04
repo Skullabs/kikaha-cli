@@ -42,37 +42,54 @@ build_move_to(){
 build_build(){
 	build_move_to "Building" $1
 	build_requires_pom
-        $MVN clean install
+  $MVN clean install
+  
 }
 
 build_run_app(){
 	build_move_to "Running" $1
 	build_requires_pom
-        $MVN clean package kikaha:run
+  if [ "$cached" = "true" ]; then
+    $MVN kikaha:run
+  else
+    $MVN clean package kikaha:run
+  fi
 }
 
 build_package(){
 	build_move_to "Packing" $1
 	build_requires_pom
-        $MVN clean package kikaha:package
+  if [ "$cached" = "true" ]; then
+    $MVN kikaha:package
+  else
+    $MVN clean package kikaha:package
+  fi
 }
 
 build_deploy(){
 	build_move_to "Deploying" $1
 	build_requires_pom
-        $MVN clean deploy
+  if [ "$cached" = "true" ]; then
+    $MVN deploy
+  else
+    $MVN clean deploy
+  fi
 }
 
 build_clean(){
 	build_move_to "Cleaning" $1
 	build_requires_pom
-        $MVN clean
+  $MVN clean
 }
 
 build_test(){
 	build_move_to "Testing" $1
 	build_requires_pom
-        $MVN clean test
+  if [ "$cached" = "true" ]; then
+    $MVN deploy
+  else
+    $MVN clean test
+  fi
 }
 
 build_help(){
