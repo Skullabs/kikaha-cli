@@ -1,10 +1,8 @@
 #!/bin/sh
 
-if [ "$SKIPTESTS" = "" ]; then
-	SKIPTESTS=false
-fi
-
-MVN_OPTS="$MVN_OPTS -Dconfig.skip.tests=$SKIPTESTS"
+SKIPTESTS=${SKIPTESTS:-false}
+skip_tests=${skip_tests:-$SKIPTESTS}
+MVN_OPTS="$MVN_OPTS -Dconfig.skip.tests=$skip_tests"
 MVN="mvn $MVN_OPTS"
 
 debug "mvn: `which mvn`"
