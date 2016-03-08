@@ -5,7 +5,7 @@ setup_run(){
 	setup_download_maven
 	setup_update_maven_logging
 	setup_save_maven_conf
-  kikaha repo add default git@github.com:Skullabs/kikaha-cli-plugins.git --force=true --QUIET=true
+  kikaha repo add default https://github.com/Skullabs/kikaha-cli-plugins.git --force=true --QUIET=true
 }
 
 setup_download_maven(){
