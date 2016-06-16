@@ -14,11 +14,11 @@ grape(){
 }
 
 info(){
-	echo "$(yellow '[INFO]') $@" 1>&2
+	echo "$(yellow '::') $@" 1>&2
 }
 
 warn(){
-	echo "$(red '[WARN]') $@" 1>&2
+	echo "$(red '::') $@" 1>&2
 }
 
 debug(){
@@ -28,7 +28,7 @@ debug(){
 		shift
 	fi
 	if [ ! "$QUIET" = "true" -a "$DEBUG" = "true" ]; then
-		echo $echo_opts "[DEBUG] $@" 1>&2
+		echo $echo_opts ":: $@" 1>&2
 	fi
 }
 

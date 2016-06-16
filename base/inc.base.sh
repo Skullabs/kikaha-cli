@@ -3,7 +3,7 @@ PLUGIN_DIR=$KDIR/plugins/
 
 kikaha_print_title(){
   if [ ! "$QUIET" = "true" ]; then
-    info "$(yellow 'KIKAHA') - $(grape 'an absurdly fast web server designed for microservices')"
+    info "$(yellow 'KIKAHA') - $(grape 'the easiest platform for writing fast microservices')"
   fi
 }
 
@@ -17,7 +17,7 @@ cat <<EOF
       $(yellow "|     | |  | |     ||  _  ||  |  ||  _  |")
       $(yellow "|  .  | |  | |  .  ||  |  ||  |  ||  |  |")
       $(yellow "|__|\_||____||__|\_||__|__||__|__||__|__|")
- $(grape 'an absurdly fast web server designed for microservices')
+ $(grape 'the easiest platform for writing fast microservices')
 
 EOF
 fi
@@ -27,6 +27,11 @@ kikaha_which_plugin(){
 	plugin="$PLUGIN_DIR/plugin.${1}.sh"
 	if [ -f $plugin ]; then
 		echo $plugin
+  else
+    plugin="$PLUGIN_DIR/${1}/plugin.${1}.sh"
+    if [ -f $plugin ]; then
+      echo $plugin
+    fi
 	fi
 }
 
