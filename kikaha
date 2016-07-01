@@ -23,7 +23,7 @@ done
 # LOAD VARIABLES FROM COMMAND LINE
 for arg in $@; do
   name=`arg_name $arg`
-  if [ ! "$name" = "${arg}" ]; then
+  if [ ! "$name" = "${arg}" -a "`is_arg $arg`" = "1" ]; then
     value=`arg_value $arg`
     export $name=$value
     debug "Command line variable $name: $value"
@@ -44,6 +44,8 @@ else
 	plugin_name="build"
 	plugin_location=`kikaha_which_plugin $plugin_name`
 fi
+
+plugin_name=`echo $plugin_name | sed 's/-/_/g'`
 
 . $plugin_location
 debug "Plugin loaded: $(grape $plugin_name)"

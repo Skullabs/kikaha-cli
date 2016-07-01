@@ -61,7 +61,7 @@ download(){
 }
 
 arg_name(){
-  echo "$@" | sed 's/--\([^=]*\).*/\1/'
+  echo "$@" | sed 's/--\([^=]*\).*/\1/;s/-/_/g'
 }
 
 arg_value(){
