@@ -91,8 +91,6 @@ build_test(){
 }
 
 build_help(){
-kikaha_print_logo
-
 cat <<EOF
 
  --[ available commands ]--------------------------
@@ -102,17 +100,6 @@ cat <<EOF
   $(grape run_app):      run a module
   $(grape test):         test a module (or all modules)
   $(grape help):         print this help message
-
- --[ available config variables ]------------------
-  $(grape SKIPTESTS)    [$(yellow true),$(yellow false)]
-        skip all unit and integration tests.
-
-  $(grape QUIET)        [$(yellow true),$(yellow false)]
-        hide all uneeded text output, except by those
-        printed by the build plan itself.
-
-  $(grape DEBUG)        [$(yellow true),$(yellow false)]
-        show debug informations.
 
 EOF
 

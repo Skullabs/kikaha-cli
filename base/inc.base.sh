@@ -3,24 +3,8 @@ PLUGIN_DIR=$KDIR/plugins/
 
 kikaha_print_title(){
   if [ ! "$QUIET" = "true" ]; then
-    info "$(yellow 'KIKAHA') - $(grape 'the easiest platform for writing fast microservices')"
+    info "$(yellow 'kikaha') command line tool - $VERSION"
   fi
-}
-
-kikaha_print_logo(){
-if [ ! "$QUIET" = "true" ]; then
-cat <<EOF
-      $(yellow " __  _  ____  __  _   ____  __ __   ____ ")
-      $(yellow "|  |/ ]|    ||  |/ ] /    ||  |  | /    |")
-      $(yellow "|  ' /  |  | |  ' / |  o  ||  |  ||  o  |")
-      $(yellow "|    \  |  | |    \ |     ||  _  ||     |")
-      $(yellow "|     | |  | |     ||  _  ||  |  ||  _  |")
-      $(yellow "|  .  | |  | |  .  ||  |  ||  |  ||  |  |")
-      $(yellow "|__|\_||____||__|\_||__|__||__|__||__|__|")
- $(grape 'the easiest platform for writing fast microservices')
-
-EOF
-fi
 }
 
 kikaha_which_plugin(){

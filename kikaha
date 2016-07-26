@@ -46,9 +46,11 @@ else
 fi
 
 plugin_name=`echo $plugin_name | sed 's/-/_/g'`
+plugin_command=`echo $1 | sed 's/-/_/g'`
+if [ "$#" -gt 0 ]; then shift; fi
 
 . $plugin_location
 debug "Plugin loaded: $(grape $plugin_name)"
-debug "Plugin args: $@"
-kikaha_run_plugin $plugin_name $@
+debug "Plugin args: $plugin_params"
+kikaha_run_plugin $plugin_name $plugin_command $@
 
