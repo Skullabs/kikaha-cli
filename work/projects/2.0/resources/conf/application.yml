@@ -1,0 +1,17 @@
+server:
+  
+  static:
+    enabled: false
+
+  urouting:
+    default-content-type: "application/json"
+
+  auth:
+    # security-context-factory: kikaha.hazelcast.HazelcastSecurityContextFactory
+    # security-context-factory: kikaha.core.modules.security.RESTAPISecurityContextFactory
+
+    # Configuration for fixed-user-and-pass Identity Manager
+    fixed-auth:
+      username: "admin"
+      password: "admin"
+
