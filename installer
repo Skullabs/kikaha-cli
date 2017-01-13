@@ -66,6 +66,14 @@ tmp_dir=kikaha_$$
 install_dir=${HOME}/.kikaha/
 
 # MAIN
+if [ ! -d /tmp ]; then
+	warn "It seems that your UNIX environment does not have a valid /tmp directory."
+	warn "Should the installer continue anyway? CTRL+C to abort, ENTER to continue."
+	read abort
+else
+	cd /tmp
+fi
+
 for arg in $@; do
   name=`arg_name $arg`
   value=`arg_value $arg`
@@ -73,7 +81,7 @@ for arg in $@; do
 done
 
 if [ -d $install_dir ]; then
-	warn "Directory already exists: $(yellow $install_dir)"
+	warn "Directory already exists: $(yellow $install_dir). Press CTRL+C to abort, ENTER to continue."
 	read abort
 	info "Overriding install dir: $(yellow $install_dir)"
 	rm -rf $install_dir
