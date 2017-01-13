@@ -5,7 +5,7 @@ var_set(){
   var=$2
   value=$3
 
-  sed -i -z "s/<!-- kikaha-$var -->\([^<]*\)<!-- \/kikaha-$var -->/<!-- kikaha-$var -->$value<!-- \/kikaha-$var -->/" $file
+  sed -i -z "s/<!-- var-$var -->\([^<]*\)<!-- \/var-$var -->/<!-- var-$var -->$value<!-- \/var-$var -->/" $file
 }
 
 var_add(){
@@ -13,12 +13,12 @@ var_add(){
   var=$2
   value="$3"
 
-  sed -i -z -e "s/<!-- kikaha-$var -->\(.*\)<!-- \/kikaha-$var -->/<!-- kikaha-$var -->\1$value<!-- \/kikaha-$var -->/g" $file
+  sed -i -z -e "s/<!-- var-$var -->\(.*\)<!-- \/var-$var -->/<!-- var-$var -->\1$value<!-- \/var-$var -->/g" $file
 }
 
 var_get(){
   file=$1
   var=$2
 
-  sed -z "s/.*<!-- kikaha-$var -->\([^<]*\)<!-- \/kikaha-$var -->.*/\1/" $file
+  sed -z "s/.*<!-- var-$var -->\([^<]*\)<!-- \/var-$var -->.*/\1/" $file
 }

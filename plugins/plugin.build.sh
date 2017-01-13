@@ -5,9 +5,10 @@ skip_tests=${skip_tests:-$SKIPTESTS}
 MVN_OPTS="$MVN_OPTS -Dconfig.skip.tests=$skip_tests"
 MVN="mvn $MVN_OPTS"
 
-debug "mvn: `which mvn`"
+debug "mvn: `which mvn 2>/dev/null`"
 debug "M2_HOME: $M2_HOME"
 debug "Maven command line: $MVN"
+debug "javac: `which javac 2>/dev/null`"
 
 build_run(){
 	if [ "$#" = "0" ]; then
@@ -15,6 +16,13 @@ build_run(){
 		build_help
 		halt
 	fi
+
+	JAVAC=`which javac 2>/dev/null`
+	if [ "$JAVAC" = "" ];then
+		warn "No JDK found on your System Path. Ensure you have your JAVA_HOME propertly configured."
+		halt
+	fi
+
 	build_$@
 }
 
@@ -29,7 +37,11 @@ build_requires_pom(){
 build_move_to(){
 	action=$1
 	dir=$2
-	if [ ! "$dir" = "" -a "`is_arg $dir`" = "0" ]; then
+	if [ ! "$dir" = "" ]; then
+		if [ ! -d $dir ]; then
+			warn "Bad module (or directory) name. Could not found `grape $dir`."
+			halt
+		fi
 		info "$action module $dir..."
 		cd ${dir}
 	else

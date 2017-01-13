@@ -5,7 +5,7 @@
 # VARIABLES
 CWD=`pwd`
 KDIR=$(cd `dirname "${0}"` && pwd)
-VERSION="0.1.0-SNAPSHOT"
+KIKAHA=$0
 
 cd $CWD
 

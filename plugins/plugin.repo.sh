@@ -23,7 +23,7 @@ repo_add(){
 	cd $PLUGIN_DIR
 	info "Cloning plugin repository $name"
 	git clone $url $name
-  kikaha $name configure $PLUGIN_DIR/$name
+	$KIKAHA $name configure $PLUGIN_DIR/$name
 }
 
 repo_update(){
@@ -34,7 +34,7 @@ repo_update(){
 	info "Updating repository: $(yellow $name)"
 
 	git pull origin master
-  kikaha $name configure $PLUGIN_DIR/$name
+	$KIKAHA $name configure $PLUGIN_DIR/$name
 }
 
 repo_help(){
