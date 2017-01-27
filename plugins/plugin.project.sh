@@ -5,6 +5,7 @@ PROJECTS_DIR=projects
 
 project_run(){
 	expected_params 1 $@
+	debug "Project Module: params: $@"
 	project_$@ || halt
 }
 
@@ -14,6 +15,10 @@ project_create(){
 	group_id=${group_id:-$name}
 	version=${version:-1.0.0-SNAPSHOT}
 	artifact_id=${artifact_id:-$name}
+
+	debug "  Template name: $template_name"
+	debug "  Name: $name"
+	debug "  artifact_id: $artifact_id"
 
 	if [ -d "$artifact_id" ]; then
 		warn "A module/project named `yellow $artifact_id` already exists. Override it?"

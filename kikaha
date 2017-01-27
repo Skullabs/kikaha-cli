@@ -27,6 +27,8 @@ for arg in $@; do
     value=`arg_value $arg`
     export $name=$value
     debug "Command line variable $name: $value"
+    unset name
+    unset value
   fi
 done
 
@@ -48,9 +50,10 @@ fi
 plugin_name=`echo $plugin_name | sed 's/-/_/g'`
 plugin_command=`echo $1 | sed 's/-/_/g'`
 if [ "$#" -gt 0 ]; then shift; fi
+plugin_params=`echo $@ | sed 's/--[a-zA-Z][a-zA-Z=-]*//g'`
 
-. $plugin_location
 debug "Plugin loaded: $(grape $plugin_name)"
 debug "Plugin args: $plugin_params"
-kikaha_run_plugin $plugin_name $plugin_command $@
 
+. $plugin_location
+kikaha_run_plugin $plugin_name $plugin_command $plugin_params
