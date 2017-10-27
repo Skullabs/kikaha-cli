@@ -1,5 +1,7 @@
 #!/bin/sh
 # inc.util.sh
+TRUE=1
+FALSE=0
 
 yellow(){
 	printf "\033[1;33m$@\033[m"
@@ -40,6 +42,12 @@ expected_params(){
 	fi
 }
 
+exit_by_invalid_cmd(){
+	warn "Bad syntax" 
+	build_help
+	halt
+}
+
 halt(){
 	warn "Exiting..."
 	exit 1
@@ -71,8 +79,14 @@ arg_value(){
 is_arg(){
   prefix=`echo "$@" | sed 's/\(--\).*/\1/'`
   if [ "$prefix" = "--" ]; then
-    echo 1
+    echo $TRUE
   else
-    echo 0
+    echo $FALSE
   fi
+}
+
+cmd_exists(){
+  type $1 2>/dev/null 1>/dev/null \
+    && echo $TRUE \
+    || echo $FALSE
 }
