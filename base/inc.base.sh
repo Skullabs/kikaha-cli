@@ -30,7 +30,9 @@ kikaha_load_all_plugins(){
 kikaha_run_plugin(){
 	plugin_name=$1; shift
 	debug "Running plugin: $(grape $plugin_name)"
-	if [ "`cmd_exists ${plugin_name}_run`" == "$TRUE" ]; then
+  plugin_exists=`cmd_exists ${plugin_name}_run`
+	debug "Plugin exists: " $(grape ${plugin_exists})
+	if [ "${plugin_exists}" = "${TRUE}" ]; then
 		${plugin_name}_run $@
 	else
 		warn "Invalid command: ${plugin_nane}"
